@@ -21,6 +21,7 @@ export default new Vuex.Store({
       }
     },
     editing_node: null,
+    tree: {},
   },
   mutations: {
     login (state, result) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     setEditingNode (state, node) {
       state.editing_node = node
+    },
+    setTree (state, tree) {
+      state.tree = tree
     },
     updateUser (state, user) {
       state.user = user

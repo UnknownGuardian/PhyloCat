@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav class="navbar navbar-expand-md fixed-top">
-        <a class="navbar-brand" href="#"><router-link to="/">PhyloCat</router-link></a>
+        <router-link to="/"><a class="navbar-brand" href="#">PhyloCat</a></router-link>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,16 +9,13 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <router-link to="/"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Settings</a>
+              <router-link to="/settings"><a class="nav-link" href="#">Settings</a></router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Help</a>
+              <a class="nav-link" href="https://github.com/UnknownGuardian/PhyloCat">GitHub</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">

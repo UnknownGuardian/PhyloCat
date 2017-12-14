@@ -1,15 +1,11 @@
 <template>
   <section ref="display">
     <display-tree :phylotree="tree" :width="width" :height="height"></display-tree>
-    <textarea style="width:100%" v-model="dataToImport" ></textarea>
-    <textarea style="width:100%" v-model="jsonConverted"></textarea>
   </section>
 </template>
 
 <script>
 import DisplayTree from '@/components/DisplayTree'
-import newick from '@/newick.js'
-import nexus from '@/nexus.js'
 
 export default {
   name: 'home',
@@ -17,14 +13,6 @@ export default {
     'display-tree': DisplayTree,
   },
   methods: {
-    getParser (str) {
-      console.log('Guessing Format')
-      if (newick.isNewick(str)) {
-        return newick
-      } else if (nexus.isNexus(str)) {
-        return nexus
-      }
-    },
     handleResize (event) {
       if (this.$refs.display) {
         this.width = Math.max(300, Math.min(this.$refs.display.clientWidth, 2000))
@@ -43,15 +31,18 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   mounted () {
-    console.log(this.$refs)
     window.addEventListener('resize', this.handleResize)
     this.handleResize(null)
+  },
+  computed: {
+    tree () {
+      return this.$store.state.tree
+    },
   },
   data () {
     return {
       dataToImport: '',
       jsonConverted: '',
-      tree: {},
       width: 500,
       height: 500,
     }

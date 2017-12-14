@@ -17,6 +17,7 @@ n.parse = function (s) {
   let parsed = parseBlocks(blocks)
   console.log('ParsedBlocks', parsed)
 }
+n.isNexus = isNexus
 
 function isNexus (s) {
   return s.startsWith('#NEXUS')
