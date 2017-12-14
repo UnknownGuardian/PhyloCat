@@ -1,0 +1,141 @@
+<template>
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-12">
+      <tree 
+        ref="tree"
+        :data="phylotree" 
+        nodeText="name"
+        @clicked="clicked" 
+        @expand="expand" 
+        @retract="retract" 
+        @zoom="zoom" 
+        :zoomable="zoomable"
+        :layoutType="layoutType" 
+        :style="'max-width:' + width + 'px;max-height:' + height + 'px'"></tree>
+    </div>
+  </div>
+  <div class="row" v-if="editingNode">
+    <div class="col-12">
+      <h2>Node Editor</h2>
+        <input required type="text" v-model="editingNode.name" />
+        <input required type="text" v-model="editingNode.length" />
+        <chrome-picker v-model="editingNode.color" />
+    </div>
+  </div>
+</div>
+</template>
+
+
+
+<script>
+import {tree} from 'vued3tree'
+import {Chrome} from 'vue-color'
+export default {
+  name: 'display-tree',
+  components: {
+    tree,
+    'chrome-picker': Chrome,
+  },
+  props: {
+    phylotree: {
+      type: Object,
+      default: function () {
+        return {
+          name: 'father',
+          children: [
+            {
+              name: 'son1',
+              children: [
+                {name: 'grandson'},
+                {name: 'grandson2'}
+              ]
+            },
+            {
+              name: 'son2',
+              children: [
+                {name: 'grandson3'},
+                {name: 'grandson4'}
+              ]
+            }
+          ]
+        }
+      }
+    },
+    width: {
+      type: Number,
+      default: 500
+    },
+    height: {
+      type: Number,
+      default: 500
+    }
+  },
+  methods: {
+    clicked (param) {
+      console.log('Clicked', param)
+
+      if (this.editingNode) {
+        if (this.editingNode.name.trim().length === 0) {
+          this.editingNode.name = 'unnamed'
+        }
+      }
+      if (!param.data.color) {
+        param.data.color = JSON.parse(JSON.stringify(this.defaultColors))
+      }
+      this.editingNode = param.data
+    },
+    expand (param, p2) {
+      console.log('expand', param)
+    },
+    retract (param) {
+      console.log('retract', param)
+    },
+    zoom (param) {
+      // console.log('zoom', param)
+    },
+  },
+  watch: {
+    'editingNode.name': function (name) {
+      console.log('Editing Node changed')
+      this.$refs.tree.redraw()
+    },
+    'editingNode.length': function (newNode) {
+      console.log('Editing Node changed')
+      this.$refs.tree.redraw()
+    }
+  },
+  data () {
+    return {
+      name: 'Meow',
+      layoutType: 'euclidean',
+      zoomable: true,
+      showModal: false,
+      editingNode: null,
+      unwatch: null,
+      defaultColors: {
+        hex: '#194d33',
+        hsl: {
+          h: 150,
+          s: 0.5,
+          l: 0.2,
+          a: 1
+        },
+        hsv: {
+          h: 150,
+          s: 0.66,
+          v: 0.30,
+          a: 1
+        },
+        rgba: {
+          r: 25,
+          g: 77,
+          b: 51,
+          a: 1
+        },
+        a: 1
+      }
+    }
+  }
+}
+</script>
