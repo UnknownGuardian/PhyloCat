@@ -2,13 +2,13 @@
   <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
     <ul class="nav nav-pills flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+        <router-link to="/"><a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a></router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Import</a>
+        <router-link to="/import"><a class="nav-link" href="#">Import</a></router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Export</a>
+        <router-link to="/export"><a class="nav-link" href="#">Export</a></router-link>
       </li>
     </ul>
   </nav>
