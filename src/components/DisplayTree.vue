@@ -18,9 +18,22 @@
   <div class="row" v-if="editingNode">
     <div class="col-12">
       <h2>Node Editor</h2>
-        <input required type="text" v-model="editingNode.name" />
-        <input required type="text" v-model="editingNode.length" />
-        <chrome-picker v-model="editingNode.color" />
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" v-model="editingNode.name" class="form-control" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Label Length</label>
+        <div class="col-sm-10">
+          <input required type="text" v-model="editingNode.length"class="form-control" placeholder="Label Length">
+        </div>
+      </div>
+
+      <chrome-picker v-model="editingNode.color" />
     </div>
   </div>
 </div>
