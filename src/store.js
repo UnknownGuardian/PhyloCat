@@ -22,6 +22,8 @@ export default new Vuex.Store({
     },
     editing_node: null,
     tree: {},
+    layoutType: 'euclidean',
+    type: 'tree',
   },
   mutations: {
     login (state, result) {
@@ -34,6 +36,12 @@ export default new Vuex.Store({
     },
     setTree (state, tree) {
       state.tree = tree
+    },
+    setLayoutType (state, t) {
+      state.layoutType = t
+    },
+    setType (state, t) {
+      state.type = t
     },
     updateUser (state, user) {
       state.user = user

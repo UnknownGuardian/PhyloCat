@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Import from '@/components/Import'
+import Settings from '@/components/Settings'
 import NotFoundComponent from '@/components/NotFoundComponent'
 
 Vue.use(Router)
@@ -21,6 +22,11 @@ export default new Router({
       path: '/import',
       name: 'Import',
       component: Import
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     },
     {
       path: '*',

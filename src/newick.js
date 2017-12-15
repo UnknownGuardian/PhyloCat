@@ -92,6 +92,7 @@
     }
     return tree
   }
+  exports.format = 'Newick'
   exports.isNewick = function (s) {
     return s.endsWith(';')
   }

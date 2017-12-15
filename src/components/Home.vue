@@ -1,6 +1,13 @@
 <template>
   <section ref="display">
-    <display-tree :phylotree="tree" :width="width" :height="height"></display-tree>
+    <display-tree
+      :phylotree="tree"
+      :width="width"
+      :height="height"
+      :layoutType="layoutType" 
+      :type="type">
+    </display-tree>
+    
   </section>
 </template>
 
@@ -16,15 +23,8 @@ export default {
     handleResize (event) {
       if (this.$refs.display) {
         this.width = Math.max(300, Math.min(this.$refs.display.clientWidth, 2000))
-        this.height = Math.max(300, Math.min(this.$refs.display.clientHeight, 2000))
+        this.height = Math.max(500, Math.min(this.$refs.display.clientHeight, 2000))
       }
-    }
-  },
-  watch: {
-    'dataToImport': function (newVal, oldVal) {
-      let parser = this.getParser(newVal)
-      this.tree = parser.parse(newVal)
-      this.jsonConverted = JSON.stringify(this.tree)
     }
   },
   beforeDestroy: function () {
@@ -38,11 +38,15 @@ export default {
     tree () {
       return this.$store.state.tree
     },
+    layoutType () {
+      return this.$store.state.layoutType
+    },
+    type () {
+      return this.$store.state.type
+    },
   },
   data () {
     return {
-      dataToImport: '',
-      jsonConverted: '',
       width: 500,
       height: 500,
     }

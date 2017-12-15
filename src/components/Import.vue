@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Import Your Data</h2>
-    <p class="lead">Supported Formats: Newick</p>
+    <p class="lead">Supported Formats: Newick, Nexus <span v-if="detected" class="strong">| <strong>Detected: {{ detected }}</strong></span></p>
     <textarea style="width:100%" v-model="dataToImport" ></textarea>
 
     <h2>Export Your Data</h2>
@@ -31,14 +31,18 @@ export default {
     'dataToImport': function (newVal, oldVal) {
       let parser = this.getParser(newVal)
       if (parser) {
+        this.detected = parser.format
         this.tree = parser.parse(newVal)
         this.jsonConverted = JSON.stringify(this.tree)
         this.$store.commit('setTree', this.tree)
+      } else {
+        this.detected = ''
       }
     }
   },
   data () {
     return {
+      detected: '',
       dataToImport: '',
       jsonConverted: '',
       tree: {},
